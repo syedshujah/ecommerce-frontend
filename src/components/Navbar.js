@@ -14,16 +14,16 @@ import { useCart } from "../context/CartContext";
 
 function NavigationBar() {
   const navigate = useNavigate();
+  const [showCategories, setShowCategories] = useState(false);
   const { cartItems } = useCart();
   const [searchQuery, setSearchQuery] = useState("");
   const [suggestions, setSuggestions] = useState([]);
-  const [showCategories, setShowCategories] = useState(false);
 
   const handleInputChange = async (e) => {
     const value = e.target.value;
     setSearchQuery(value);
 
-    if (value.trim()) {
+    if (value.trim().length > 0) {
       const res = await fetch(`https://dummyjson.com/products/search?q=${value}`);
       const data = await res.json();
       setSuggestions(data.products.slice(0, 5));
@@ -38,99 +38,101 @@ function NavigationBar() {
     setSuggestions([]);
   };
 
-  const handleCategoryClick = (cat) => {
-    navigate(`/products?category=${cat}`);
+  const toggleDropdown = () => {
+    setShowCategories(!showCategories);
+  };
+
+  const handleCategoryClick = (category) => {
+    navigate(`/products?category=${category}`);
     setShowCategories(false);
     setSuggestions([]);
   };
 
   return (
     <>
-      <Navbar expand="lg" sticky="top" className="bg-light shadow-sm">
+      <Navbar expand="lg" style={{ backgroundColor: "#add8e6" }} variant="light" sticky="top">
         <Container>
-          <Navbar.Brand as={Link} to="/" className="fw-bold text-primary">
-            <img
-              src="/Logo.svg"
-              alt="Blue Mart"
-              width="32"
-              height="32"
-              className="me-2"
-            />
-            Blue Mart
+          <Navbar.Brand as={Link} to="/" className="d-flex align-items-between">
+            <img src="/Logo.svg" alt="Logo" width="32" height="32" className="me-2" />
+            <span style={{ color: "#f8f9fa", fontWeight: "bold" }}>Blue Mart</span>
           </Navbar.Brand>
 
-          <Navbar.Toggle aria-controls="main-navbar" />
-          <Navbar.Collapse id="main-navbar">
-            <Nav className="me-auto my-2 my-lg-0 d-flex align-items-lg-center gap-3">
-              <span
-                onClick={() => setShowCategories(!showCategories)}
-                className="text-dark fw-semibold"
-                style={{ cursor: "pointer" }}
-              >
-                Categories
-              </span>
-
-              <Nav.Link as={Link} to="/products">Products</Nav.Link>
-              <Nav.Link as={Link} to="/checkout">Checkout</Nav.Link>
-              <Nav.Link as={Link} to="/login">Login</Nav.Link>
-              <Nav.Link as={Link} to="/cart" className="position-relative">
-                <FaShoppingCart />
-                <span className="ms-1">Cart</span>
-                {cartItems.length > 0 && (
-                  <span className="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
-                    {cartItems.length}
-                  </span>
-                )}
-              </Nav.Link>
-            </Nav>
-
-            {/* Search Bar */}
-            <Form className="d-flex position-relative mt-2 mt-lg-0" onSubmit={handleSearch}>
+          <Navbar.Toggle aria-controls="navbarScroll" />
+          <Navbar.Collapse id="navbarScroll">
+            <Form onSubmit={handleSearch} className="mx-auto my-2 my-lg-0 w-100" style={{ maxWidth: "500px" }}>
               <InputGroup>
                 <FormControl
                   type="search"
                   placeholder="Search products"
                   value={searchQuery}
                   onChange={handleInputChange}
-                  style={{ minWidth: "200px" }}
                 />
-                <Button type="submit" variant="outline-secondary">
+                <Button type="submit" variant="light">
                   <FaSearch />
                 </Button>
               </InputGroup>
 
-              {/* Suggestions */}
               {suggestions.length > 0 && (
-                <div
-                  className="position-absolute bg-white shadow w-100 mt-2 rounded z-3"
-                  style={{ maxHeight: "200px", overflowY: "auto", top: "100%" }}
-                >
-                  {suggestions.map((p) => (
+                <div className="position-absolute bg-white shadow rounded w-100 mt-1 z-3 p-2">
+                  {suggestions.map((product) => (
                     <div
-                      key={p.id}
+                      key={product.id}
                       onClick={() => {
-                        navigate(`/product/${p.id}`);
+                        navigate(`/product/${product.id}`);
                         setSearchQuery("");
                         setSuggestions([]);
                       }}
-                      style={{ padding: "8px 10px", cursor: "pointer" }}
-                      className="text-dark hover-bg-light"
+                      style={{ cursor: "pointer", padding: "5px 10px", color: "#333" }}
                     >
-                      {p.title}
+                      {product.title}
                     </div>
                   ))}
                 </div>
               )}
             </Form>
+
+            <Nav className="ms-auto d-flex align-items-center gap-3">
+              <span
+                className="text-white fw-semibold"
+                style={{ cursor: "pointer" }}
+                onClick={toggleDropdown}
+              >
+                Categories
+              </span>
+
+              <Nav.Link as={Link} to="/products" style={{ color: "#f5f5f5" }}>
+                Products
+              </Nav.Link>
+
+              <Nav.Link as={Link} to="/cart" style={{ color: "#f5f5f5", position: "relative" }}>
+                <FaShoppingCart />
+                <span className="ms-1">Cart</span>
+                {cartItems.length > 0 && (
+                  <span
+                    className="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger"
+                    style={{ fontSize: "0.6rem" }}
+                  >
+                    {cartItems.length}
+                  </span>
+                )}
+              </Nav.Link>
+
+              <Nav.Link as={Link} to="/checkout" style={{ color: "#f5f5f5" }}>
+                Checkout
+              </Nav.Link>
+              <Nav.Link as={Link} to="/login" style={{ color: "#f5f5f5" }}>
+                Login
+              </Nav.Link>
+            </Nav>
           </Navbar.Collapse>
         </Container>
       </Navbar>
 
-      {/* Category Dropdown */}
+      {/* Categories Dropdown */}
       {showCategories && (
         <div className="bg-light py-2 shadow-sm">
           <Container>
-            <div className="d-flex flex-wrap gap-3 justify-content-center">
+            <div className="d-flex gap-4 flex-wrap justify-content-center">
               {[
                 "smartphones",
                 "laptops",

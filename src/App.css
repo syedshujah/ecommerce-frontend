@@ -163,3 +163,11 @@ body {
     padding: 6px 0;
   }
 }
+/* optional CSS */
+@media (max-width: 991px) {
+  .navbar-collapse {
+    background: #add8e6;
+    padding: 10px;
+  }
+}
+
