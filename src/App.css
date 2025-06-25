@@ -82,3 +82,84 @@ body {
     opacity: 0;
   }
 }
+/* Make all images responsive */
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+/* Ensure no horizontal scroll */
+body {
+  overflow-x: hidden;
+}
+
+/* For carousel images */
+.banner-img {
+  height: 400px;
+  object-fit: cover;
+}
+
+@media (max-width: 768px) {
+  .banner-img {
+    height: 250px;
+  }
+
+  .hero-banner h3 {
+    font-size: 1.2rem;
+  }
+
+  .hero-banner p {
+    font-size: 0.9rem;
+  }
+
+  .categories-section .category-card {
+    margin-bottom: 15px;
+  }
+}
+@media (max-width: 768px) {
+  .navbar-brand {
+    font-size: 1rem;
+  }
+
+  .form-control {
+    font-size: 0.85rem;
+  }
+
+  .navbar .nav-link {
+    font-size: 0.85rem;
+    padding: 0.3rem 0.5rem;
+  }
+}
+.animated-top-strip {
+  background-color: #0d6efd;
+  color: white;
+  padding: 8px 0;
+  text-align: center;
+  font-weight: bold;
+  font-size: 0.95rem;
+  overflow: hidden;
+  position: sticky;
+  top: 0;
+  z-index: 999;
+}
+
+.animated-message {
+  animation: slideIn 15s linear infinite;
+  white-space: nowrap;
+}
+
+@keyframes slideIn {
+  0% {
+    transform: translateX(100%);
+  }
+  100% {
+    transform: translateX(-100%);
+  }
+}
+
+@media (max-width: 576px) {
+  .animated-top-strip {
+    font-size: 0.75rem;
+    padding: 6px 0;
+  }
+}
