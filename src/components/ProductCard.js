@@ -10,55 +10,54 @@ function ProductCard({ product }) {
     <Card
       className="product-card h-100 shadow-sm border-0"
       style={{
-        borderRadius: "1rem",
+        borderRadius: "12px",
         overflow: "hidden",
-        transition: "transform 0.3s ease",
+        backgroundColor: "#ffffff",
       }}
     >
-      {/* ✅ Image with link to detail */}
+      {/* ✅ Image Section */}
       <Link
         to={`/product/${product.id}`}
         style={{ textDecoration: "none", color: "inherit" }}
       >
-       <div
-  style={{
-    height: "180px",
-    backgroundColor: "#f8f9fa",
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "center",
-    overflow: "hidden",
-  }}
->
-  <Card.Img
-    src={product.thumbnail}
-    alt={product.title}
-    style={{
-      maxHeight: "100%",
-      maxWidth: "100%",
-      objectFit: "contain",  // 🛠 this is the key change
-    }}
-    className="product-image"
-  />
-</div>
+        <div
+          style={{
+            height: "200px",
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            backgroundColor: "#f8f9fa",
+            padding: "10px",
+          }}
+        >
+          <img
+            src={product.thumbnail}
+            alt={product.title}
+            style={{
+              maxHeight: "100%",
+              maxWidth: "100%",
+              objectFit: "contain",
+            }}
+          />
+        </div>
 
-
+        {/* ✅ Product Info */}
         <Card.Body className="px-3 py-2">
-          <Card.Title className="fs-6 fw-semibold mb-1">{product.title}</Card.Title>
+          <Card.Title className="fs-6 fw-semibold text-dark mb-1">
+            {product.title}
+          </Card.Title>
           <Card.Text
-            className="text-muted mb-2"
-            style={{ fontSize: "0.9rem", lineHeight: "1.3rem" }}
+            className="text-muted"
+            style={{ fontSize: "13px", minHeight: "36px" }}
           >
-            {product.description.length > 60
-              ? `${product.description.slice(0, 60)}...`
-              : product.description}
+            {product.description.slice(0, 50)}...
           </Card.Text>
         </Card.Body>
       </Link>
 
-      {/* ✅ Price + Cart Button */}
+      {/* ✅ Price & Add to Cart */}
       <div className="d-flex justify-content-between align-items-center px-3 pb-3">
-        <span className="fw-bold text-primary">${product.price.toFixed(2)}</span>
+        <span className="fw-bold text-primary">${product.price}</span>
         <Button
           size="sm"
           variant="outline-primary"
