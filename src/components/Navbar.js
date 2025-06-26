@@ -15,6 +15,7 @@ import { useCart } from "../context/CartContext";
 function NavigationBar() {
   const navigate = useNavigate();
   const [showCategories, setShowCategories] = useState(false);
+  const [expanded, setExpanded] = useState(false); // ✅ NEW
   const { cartItems } = useCart();
   const [searchQuery, setSearchQuery] = useState("");
   const [suggestions, setSuggestions] = useState([]);
@@ -36,6 +37,7 @@ function NavigationBar() {
     e.preventDefault();
     navigate(`/products?search=${searchQuery}`);
     setSuggestions([]);
+    setExpanded(false); // ✅ CLOSE NAVBAR
   };
 
   const toggleDropdown = () => {
@@ -46,26 +48,34 @@ function NavigationBar() {
     navigate(`/products?category=${category}`);
     setShowCategories(false);
     setSuggestions([]);
+    setExpanded(false); // ✅ CLOSE NAVBAR
   };
 
   return (
     <>
-      <Navbar expand="lg" className="navbar-custom py-2" variant="light" sticky="top">
+      <Navbar
+        expand="lg"
+        expanded={expanded}
+        onToggle={() => setExpanded(!expanded)}
+        className="navbar-custom py-2"
+        variant="light"
+        sticky="top"
+      >
         <Container fluid>
           {/* ✅ Brand + Toggle */}
           <div className="d-flex align-items-center justify-content-between w-100">
             <Navbar.Brand as={Link} to="/" className="d-flex align-items-center gap-2">
               <img src="/Logo.svg" alt="Logo" width="32" height="32" />
-              <span style={{ color: "#fff", fontWeight: "bold", fontSize: "1.2rem" }}>Blue Mart</span>
+              <span style={{ color: "#fff", fontWeight: "bold", fontSize: "1.2rem" }}>
+                Blue Mart
+              </span>
             </Navbar.Brand>
 
-            {/* ✅ Toggle Button for Mobile */}
             <Navbar.Toggle aria-controls="navbarScroll" className="bg-light" />
           </div>
 
-          {/* ✅ Collapsible Nav Items */}
           <Navbar.Collapse id="navbarScroll">
-            {/* ✅ Center - Search Bar */}
+            {/* ✅ Search Bar */}
             <Form
               onSubmit={handleSearch}
               className="my-3 my-lg-0 mx-auto"
@@ -91,6 +101,7 @@ function NavigationBar() {
                         navigate(`/product/${product.id}`);
                         setSearchQuery("");
                         setSuggestions([]);
+                        setExpanded(false); // ✅ CLOSE NAVBAR
                       }}
                       style={{ cursor: "pointer", padding: "5px 10px", color: "#333" }}
                     >
@@ -101,22 +112,35 @@ function NavigationBar() {
               )}
             </Form>
 
-            {/* ✅ Right - Nav Links */}
+            {/* ✅ Nav Links */}
             <Nav className="ms-auto d-flex align-items-center gap-3 mt-3 mt-lg-0">
               <Nav.Link
                 as="span"
-                onClick={toggleDropdown}
+                onClick={() => {
+                  toggleDropdown();
+                  setExpanded(false); // ✅ CLOSE NAVBAR
+                }}
                 className="nav-link nav-underline-hover"
                 style={{ cursor: "pointer" }}
               >
                 Categories
               </Nav.Link>
 
-              <Nav.Link as={Link} to="/products" className="text-white nav-underline-hover">
+              <Nav.Link
+                as={Link}
+                to="/products"
+                onClick={() => setExpanded(false)}
+                className="text-white nav-underline-hover"
+              >
                 Products
               </Nav.Link>
 
-              <Nav.Link as={Link} to="/cart" className="text-white position-relative d-flex align-items-center gap-1 nav-underline-hover">
+              <Nav.Link
+                as={Link}
+                to="/cart"
+                onClick={() => setExpanded(false)}
+                className="text-white position-relative d-flex align-items-center gap-1 nav-underline-hover"
+              >
                 <FaShoppingCart />
                 <span>Cart</span>
                 {cartItems.length > 0 && (
@@ -129,15 +153,29 @@ function NavigationBar() {
                 )}
               </Nav.Link>
 
-              <Nav.Link as={Link} to="/checkout" className="text-white nav-underline-hover">
+              <Nav.Link
+                as={Link}
+                to="/checkout"
+                onClick={() => setExpanded(false)}
+                className="text-white nav-underline-hover"
+              >
                 Checkout
               </Nav.Link>
 
-              <Nav.Link as={Link} to="/login" className="text-white nav-underline-hover">
+              <Nav.Link
+                as={Link}
+                to="/login"
+                onClick={() => setExpanded(false)}
+                className="text-white nav-underline-hover"
+              >
                 Login
               </Nav.Link>
 
-              <Nav.Link href="#contact-section" className="text-white nav-underline-hover">
+              <Nav.Link
+                href="#contact-section"
+                onClick={() => setExpanded(false)}
+                className="text-white nav-underline-hover"
+              >
                 Contact Us
               </Nav.Link>
             </Nav>
@@ -145,7 +183,7 @@ function NavigationBar() {
         </Container>
       </Navbar>
 
-      {/* Categories Dropdown */}
+      {/* ✅ Categories Dropdown */}
       {showCategories && (
         <div className="bg-light py-2 shadow-sm">
           <Container>
