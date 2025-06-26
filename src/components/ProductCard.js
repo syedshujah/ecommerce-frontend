@@ -20,28 +20,28 @@ function ProductCard({ product }) {
         to={`/product/${product.id}`}
         style={{ textDecoration: "none", color: "inherit" }}
       >
-        <div
-          style={{
-            height: "180px",
-            backgroundColor: "#f8f9fa",
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
-            overflow: "hidden",
-          }}
-        >
-          <Card.Img
-            src={product.thumbnail}
-            alt={product.title}
-            style={{
-              height: "100%",
-              width: "100%",
-              objectFit: "cover",
-              transition: "transform 0.3s ease-in-out",
-            }}
-            className="product-img"
-          />
-        </div>
+       <div
+  style={{
+    height: "180px",
+    backgroundColor: "#f8f9fa",
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+    overflow: "hidden",
+  }}
+>
+  <Card.Img
+    src={product.thumbnail}
+    alt={product.title}
+    style={{
+      maxHeight: "100%",
+      maxWidth: "100%",
+      objectFit: "contain",  // 🛠 this is the key change
+    }}
+    className="product-image"
+  />
+</div>
+
 
         <Card.Body className="px-3 py-2">
           <Card.Title className="fs-6 fw-semibold mb-1">{product.title}</Card.Title>
