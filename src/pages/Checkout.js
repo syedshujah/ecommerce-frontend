@@ -1,59 +1,88 @@
 import React from "react";
 import { useCart } from "../context/CartContext";
-import { Container, Row, Col, Card, Button } from "react-bootstrap";
+import { Container, Row, Col, Card, Button, Image } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
+import { FaTruck, FaTag, FaShoppingBasket } from "react-icons/fa";
 
 function Checkout() {
-    const navigate = useNavigate();
+  const navigate = useNavigate();
+  const { cartItems, clearCart } = useCart();
 
-    const handleCheckout = () => {
-        clearCart();
-        navigate("/order-success");
-    };
-    const { cartItems, clearCart } = useCart();
+  const handleCheckout = () => {
+    clearCart();
+    navigate("/order-success");
+  };
 
-    const subtotal = cartItems.reduce((total, item) => total + item.price * item.quantity, 0);
-    const delivery = subtotal > 0 ? 5 : 0;
-    const total = subtotal + delivery;
+  const subtotal = cartItems.reduce((total, item) => total + item.price * item.quantity, 0);
+  const delivery = subtotal > 0 ? 5 : 0;
+  const total = subtotal + delivery;
 
-    return (
-        <Container className="my-5">
-            <h3 className="mb-4 text-center text-primary fw-bold">Order Summary</h3>
-            {cartItems.length === 0 ? (
-                <p className="text-center">Your cart is empty.</p>
-            ) : (
-                <Row>
-                    <Col md={8}>
-                        {cartItems.map((item) => (
-                            <Card key={item.id} className="mb-3">
-                                <Card.Body className="d-flex justify-content-between align-items-center">
-                                    <div>
-                                        <h6 className="mb-0">{item.title}</h6>
-                                        <small className="text-muted">
-                                            {item.quantity} × ${item.price}
-                                        </small>
-                                    </div>
-                                    <span className="fw-semibold">${item.quantity * item.price}</span>
-                                </Card.Body>
-                            </Card>
-                        ))}
-                    </Col>
-                    <Col md={4}>
-                        <Card className="p-3">
-                            <h5>Summary</h5>
-                            <hr />
-                            <p>Subtotal: ${subtotal.toFixed(2)}</p>
-                            <p>Delivery: ${delivery.toFixed(2)}</p>
-                            <h6>Total: ${total.toFixed(2)}</h6>
-                            <Button variant="success" className="mt-3 w-100" onClick={handleCheckout}>
-                                Confirm & Place Order
-                            </Button>
-                        </Card>
-                    </Col>
-                </Row>
-            )}
-        </Container>
-    );
+  return (
+    <Container className="my-5">
+      <Row className="justify-content-center">
+        <Col md={10}>
+          <h2 className="text-center fw-bold text-primary mb-4">🧾 Checkout Summary</h2>
+          <Row>
+            {/* Cart Items */}
+            <Col md={7}>
+              {cartItems.length === 0 ? (
+                <Card className="p-4 text-center shadow-sm border-0">
+                  <h5>Your cart is empty.</h5>
+                </Card>
+              ) : (
+                cartItems.map((item) => (
+                  <Card key={item.id} className="mb-3 border-0 shadow-sm rounded-4 p-3">
+                    <div className="d-flex align-items-center gap-3">
+                      <Image
+                        src={item.thumbnail}
+                        alt={item.title}
+                        style={{ width: "70px", height: "70px", objectFit: "cover", borderRadius: "10px" }}
+                      />
+                      <div className="flex-grow-1">
+                        <h6 className="mb-1 fw-semibold">{item.title}</h6>
+                        <small className="text-muted">
+                          {item.quantity} × ${item.price.toFixed(2)}
+                        </small>
+                      </div>
+                      <span className="fw-bold text-success fs-6">
+                        ${item.quantity * item.price}
+                      </span>
+                    </div>
+                  </Card>
+                ))
+              )}
+            </Col>
+
+            {/* Summary */}
+            <Col md={5}>
+              <Card className="shadow-lg p-4 border-0 rounded-4">
+                <h5 className="mb-4 fw-bold text-dark">Summary</h5>
+
+                <div className="d-flex justify-content-between mb-2">
+                  <span><FaShoppingBasket className="me-2 text-secondary" /> Subtotal</span>
+                  <span>${subtotal.toFixed(2)}</span>
+                </div>
+
+                <div className="d-flex justify-content-between mb-2">
+                  <span><FaTruck className="me-2 text-secondary" /> Delivery</span>
+                  <span>${delivery.toFixed(2)}</span>
+                </div>
+
+                <div className="d-flex justify-content-between mb-3 border-top pt-3">
+                  <strong><FaTag className="me-2 text-success" /> Total</strong>
+                  <strong>${total.toFixed(2)}</strong>
+                </div>
+
+                <Button variant="primary" className="w-100 fw-bold py-2 mt-2" onClick={handleCheckout}>
+                  Confirm & Place Order
+                </Button>
+              </Card>
+            </Col>
+          </Row>
+        </Col>
+      </Row>
+    </Container>
+  );
 }
 
 export default Checkout;

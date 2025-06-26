@@ -33,7 +33,8 @@ function Newsletter() {
   };
 
   return (
-    <div className="newsletter-wrapper" data-aos="fade-up">
+    <div className="newsletter-wrapper newsletter-section" id="contact-section"  data-aos="fade-up" >
+      <h2 className="featured-title section-heading">Contact Us</h2>
       <Container>
         <Row className="align-items-center">
           <Col md={6}>

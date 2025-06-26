@@ -22,6 +22,7 @@ function ProductCard({ product }) {
         style={{ textDecoration: "none", color: "inherit" }}
       >
         <Card.Img
+        className="img-fluid product-img"
           variant="top"
           src={product.thumbnail}
           style={{

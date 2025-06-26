@@ -1,45 +1,58 @@
+// src/components/Footer.js
 import React from "react";
 import { Container, Row, Col } from "react-bootstrap";
+import { FaMapMarkerAlt, FaPhone, FaEnvelope } from "react-icons/fa";
 import "./Footer.css";
 
 function Footer() {
   return (
-    <footer className="footer-section">
+    <footer className="custom-footer">
       <Container>
-        <Row className="footer-top">
-          <Col md={4} sm={12}>
+        <Row className="py-5">
+          {/* About Section */}
+          <Col md={4} className="mb-4">
             <h5 className="footer-title">About Blue Mart</h5>
-            <p>
-              Blue Mart is your one-stop online shop for all your daily essentials. We provide top quality products at unbeatable prices with reliable delivery.
+            <p className="footer-text">
+              At <strong>Blue Mart</strong>, we provide a top-notch online shopping experience,
+              offering quality products at affordable prices. We are committed to customer
+              satisfaction and seamless service.
             </p>
+            <a href="/" className="footer-btn">
+              Visit Store →
+            </a>
           </Col>
 
-          <Col md={4} sm={6}>
-            <h5 className="footer-title">Quick Links</h5>
+          {/* Important Links */}
+          <Col md={4} className="mb-4">
+            <h5 className="footer-title">Important Links</h5>
             <ul className="footer-links">
               <li><a href="/">Home</a></li>
-              <li><a href="/products">Products</a></li>
+              <li><a href="/products">All Products</a></li>
+              <li><a href="/login">Login</a></li>
+              <li><a href="/register">Register</a></li>
               <li><a href="/cart">Cart</a></li>
               <li><a href="/checkout">Checkout</a></li>
             </ul>
           </Col>
 
-          <Col md={4} sm={6}>
-            <h5 className="footer-title">Customer Care</h5>
-            <ul className="footer-links">
-              <li>Phone: +92 300 1234567</li>
-              <li>Email: support@bluemart.pk</li>
-              <li>Location: Lahore, Pakistan</li>
-              <li>Mon - Sat: 9:00 AM - 7:00 PM</li>
-            </ul>
+          {/* Contact Info */}
+          <Col md={4} className="mb-4">
+            <h5 className="footer-title">Contact Us</h5>
+            <p><FaMapMarkerAlt className="me-2" /> Lahore, Pakistan</p>
+            <p><FaPhone className="me-2" /> +92 300 1234567</p>
+            <p><FaEnvelope className="me-2" /> support@bluemart.pk</p>
           </Col>
         </Row>
 
-        <hr className="footer-divider" />
-
-        <Row className="footer-bottom">
-          <Col className="text-center">
-            <p className="mb-0">© {new Date().getFullYear()} Blue Mart. All rights reserved.</p>
+        {/* Bottom Bar */}
+        <Row className="border-top pt-3 text-center">
+          <Col md={12}>
+            <div className="footer-bottom-links">
+              <a href="/">Privacy Policy</a>
+              <a href="/">Terms of Use</a>
+              <a href="/">Sitemap</a>
+            </div>
+            <p className="mt-2">© {new Date().getFullYear()} Blue Mart. All rights reserved.</p>
           </Col>
         </Row>
       </Container>
@@ -48,3 +61,4 @@ function Footer() {
 }
 
 export default Footer;
+

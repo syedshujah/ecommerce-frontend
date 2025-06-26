@@ -50,16 +50,22 @@ function NavigationBar() {
 
   return (
     <>
-      <Navbar expand="lg" style={{ backgroundColor: "#add8e6" }} variant="light" sticky="top">
-        <Container>
-          <Navbar.Brand as={Link} to="/" className="d-flex align-items-between">
-            <img src="/Logo.svg" alt="Logo" width="32" height="32" className="me-2" />
-            <span style={{ color: "#f8f9fa", fontWeight: "bold" }}>Blue Mart</span>
-          </Navbar.Brand>
+      <Navbar expand="lg" className="navbar-custom py-2" variant="light" sticky="top">
+        <Container fluid>
+          <div className="d-flex justify-content-between align-items-center w-100 gap-3 flex-wrap">
 
-          <Navbar.Toggle aria-controls="navbarScroll" />
-          <Navbar.Collapse id="navbarScroll">
-            <Form onSubmit={handleSearch} className="mx-auto my-2 my-lg-0 w-100" style={{ maxWidth: "500px" }}>
+            {/* Left - Logo */}
+            <Navbar.Brand as={Link} to="/" className="d-flex align-items-center gap-2">
+              <img src="/Logo.svg" alt="Logo" width="32" height="32" />
+              <span style={{ color: "#fff", fontWeight: "bold", fontSize: "1.2rem" }}>Blue Mart</span>
+            </Navbar.Brand>
+
+            {/* Center - Search Bar */}
+            <Form
+              onSubmit={handleSearch}
+              className="flex-grow-1 mx-auto"
+              style={{ maxWidth: "500px", minWidth: "250px" }}
+            >
               <InputGroup>
                 <FormControl
                   type="search"
@@ -71,9 +77,8 @@ function NavigationBar() {
                   <FaSearch />
                 </Button>
               </InputGroup>
-
               {suggestions.length > 0 && (
-                <div className="position-absolute bg-white shadow rounded w-100 mt-1 z-3 p-2">
+                <div className="suggestion-box bg-white shadow rounded p-2 position-absolute w-100 z-3 mt-1">
                   {suggestions.map((product) => (
                     <div
                       key={product.id}
@@ -91,22 +96,26 @@ function NavigationBar() {
               )}
             </Form>
 
-            <Nav className="ms-auto d-flex align-items-center gap-3">
-              <span
-                className="text-white fw-semibold"
-                style={{ cursor: "pointer" }}
+            {/* Right - Nav Links */}
+            <Nav className="d-flex align-items-center gap-3">
+
+              <Nav.Link
+                as="span"
                 onClick={toggleDropdown}
+                className="nav-link nav-underline-hover"
+                style={{ cursor: "pointer" }}
               >
                 Categories
-              </span>
+              </Nav.Link>
 
-              <Nav.Link as={Link} to="/products" style={{ color: "#f5f5f5" }}>
+
+              <Nav.Link as={Link} to="/products" className="text-white nav-underline-hover">
                 Products
               </Nav.Link>
 
-              <Nav.Link as={Link} to="/cart" style={{ color: "#f5f5f5", position: "relative" }}>
+              <Nav.Link as={Link} to="/cart" className="text-white position-relative d-flex align-items-center gap-1 nav-underline-hover">
                 <FaShoppingCart />
-                <span className="ms-1">Cart</span>
+                <span>Cart</span>
                 {cartItems.length > 0 && (
                   <span
                     className="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger"
@@ -117,14 +126,21 @@ function NavigationBar() {
                 )}
               </Nav.Link>
 
-              <Nav.Link as={Link} to="/checkout" style={{ color: "#f5f5f5" }}>
+              <Nav.Link as={Link} to="/checkout" className="text-white nav-underline-hover">
                 Checkout
               </Nav.Link>
-              <Nav.Link as={Link} to="/login" style={{ color: "#f5f5f5" }}>
+
+              <Nav.Link as={Link} to="/login" className="text-white nav-underline-hover">
                 Login
               </Nav.Link>
+
+              <Nav.Link href="#contact-section" className="text-white nav-underline-hover">
+                Contact Us
+              </Nav.Link>
+
             </Nav>
-          </Navbar.Collapse>
+
+          </div>
         </Container>
       </Navbar>
 
