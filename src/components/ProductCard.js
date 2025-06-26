@@ -8,46 +8,57 @@ function ProductCard({ product }) {
 
   return (
     <Card
-      className="product-card h-100"
+      className="product-card h-100 shadow-sm border-0"
       style={{
-        minHeight: "320px",
-        maxHeight: "350px",
+        borderRadius: "1rem",
         overflow: "hidden",
-        boxShadow: "0 0 10px rgba(0,0,255,0.1)",
+        transition: "transform 0.3s ease",
       }}
     >
-      {/* Image and title click -> goes to product detail */}
+      {/* ✅ Image with link to detail */}
       <Link
         to={`/product/${product.id}`}
         style={{ textDecoration: "none", color: "inherit" }}
       >
-        <Card.Img
-        className="img-fluid product-img"
-          variant="top"
-          src={product.thumbnail}
+        <div
           style={{
-            height: "160px",
-            objectFit: "cover",
+            height: "180px",
+            backgroundColor: "#f8f9fa",
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            overflow: "hidden",
           }}
-        />
-        <Card.Body className="d-flex flex-column p-2">
-          <Card.Title className="fs-6 mb-1">{product.title}</Card.Title>
-          <Card.Text
-            className="text-muted"
+        >
+          <Card.Img
+            src={product.thumbnail}
+            alt={product.title}
             style={{
-              fontSize: "13px",
-              flexGrow: 1,
-              marginBottom: "6px",
+              height: "100%",
+              width: "100%",
+              objectFit: "cover",
+              transition: "transform 0.3s ease-in-out",
             }}
+            className="product-img"
+          />
+        </div>
+
+        <Card.Body className="px-3 py-2">
+          <Card.Title className="fs-6 fw-semibold mb-1">{product.title}</Card.Title>
+          <Card.Text
+            className="text-muted mb-2"
+            style={{ fontSize: "0.9rem", lineHeight: "1.3rem" }}
           >
-            {product.description.slice(0, 50)}...
+            {product.description.length > 60
+              ? `${product.description.slice(0, 60)}...`
+              : product.description}
           </Card.Text>
         </Card.Body>
       </Link>
 
-      {/* Add to Cart button stays outside of Link */}
+      {/* ✅ Price + Cart Button */}
       <div className="d-flex justify-content-between align-items-center px-3 pb-3">
-        <span className="fw-bold text-primary">${product.price}</span>
+        <span className="fw-bold text-primary">${product.price.toFixed(2)}</span>
         <Button
           size="sm"
           variant="outline-primary"

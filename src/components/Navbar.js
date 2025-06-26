@@ -52,19 +52,24 @@ function NavigationBar() {
     <>
       <Navbar expand="lg" className="navbar-custom py-2" variant="light" sticky="top">
         <Container fluid>
-          <div className="d-flex justify-content-between align-items-center w-100 gap-3 flex-wrap">
-
-            {/* Left - Logo */}
+          {/* ✅ Brand + Toggle */}
+          <div className="d-flex align-items-center justify-content-between w-100">
             <Navbar.Brand as={Link} to="/" className="d-flex align-items-center gap-2">
               <img src="/Logo.svg" alt="Logo" width="32" height="32" />
               <span style={{ color: "#fff", fontWeight: "bold", fontSize: "1.2rem" }}>Blue Mart</span>
             </Navbar.Brand>
 
-            {/* Center - Search Bar */}
+            {/* ✅ Toggle Button for Mobile */}
+            <Navbar.Toggle aria-controls="navbarScroll" className="bg-light" />
+          </div>
+
+          {/* ✅ Collapsible Nav Items */}
+          <Navbar.Collapse id="navbarScroll">
+            {/* ✅ Center - Search Bar */}
             <Form
               onSubmit={handleSearch}
-              className="flex-grow-1 mx-auto"
-              style={{ maxWidth: "500px", minWidth: "250px" }}
+              className="my-3 my-lg-0 mx-auto"
+              style={{ maxWidth: "500px", width: "100%" }}
             >
               <InputGroup>
                 <FormControl
@@ -96,9 +101,8 @@ function NavigationBar() {
               )}
             </Form>
 
-            {/* Right - Nav Links */}
-            <Nav className="d-flex align-items-center gap-3">
-
+            {/* ✅ Right - Nav Links */}
+            <Nav className="ms-auto d-flex align-items-center gap-3 mt-3 mt-lg-0">
               <Nav.Link
                 as="span"
                 onClick={toggleDropdown}
@@ -107,7 +111,6 @@ function NavigationBar() {
               >
                 Categories
               </Nav.Link>
-
 
               <Nav.Link as={Link} to="/products" className="text-white nav-underline-hover">
                 Products
@@ -137,10 +140,8 @@ function NavigationBar() {
               <Nav.Link href="#contact-section" className="text-white nav-underline-hover">
                 Contact Us
               </Nav.Link>
-
             </Nav>
-
-          </div>
+          </Navbar.Collapse>
         </Container>
       </Navbar>
 
