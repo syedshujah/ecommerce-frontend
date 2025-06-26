@@ -21,7 +21,7 @@ function CategoryGrid() {
     return (
         <section data-aos="slide-up">
         <div className="category-grid-container">
-            <h2 className="text-center text-primary fw-bold mb-4">Shop by Category</h2>
+            <h2 className="text-center text-primary fw-bold mb-4 section-heading">Shop by Category</h2>
             <div className="category-grid">
                 {categories.map((cat, index) => (
                     <div

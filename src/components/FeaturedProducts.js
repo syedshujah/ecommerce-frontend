@@ -35,7 +35,7 @@ function FeaturedProducts() {
 
   return (
     <section className="featured-section"  data-aos="zoom-in">
-      <h2 className="featured-title"> Featured Products</h2>
+      <h2 className="featured-title section-heading"> Featured Products</h2>
       <Container>
         <Row className="g-4">
           {products.map((product) => (

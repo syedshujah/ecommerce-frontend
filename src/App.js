@@ -13,7 +13,7 @@ import "aos/dist/aos.css";
 import WhatsAppButton from "./components/WhatsAppButton";
 import Footer from "./components/Footer";
 import LoginRegister from "./pages/LoginRegister";
-
+import ScrollToTop from "./components/ScrollToTop";
 
 
 function App() {
@@ -26,6 +26,7 @@ function App() {
   return (
     <>
       <NavigationBar />
+       <ScrollToTop /> 
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/products" element={<Products />} />
