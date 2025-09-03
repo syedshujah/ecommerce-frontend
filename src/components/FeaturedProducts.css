@@ -88,7 +88,6 @@
 .categories-row::-webkit-scrollbar {
   display: none;
 }
-
 .categories-row {
   -ms-overflow-style: none;
   scrollbar-width: none;
