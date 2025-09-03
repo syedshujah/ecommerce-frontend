@@ -66,18 +66,22 @@
 
 .category-name {
   margin-top: 8px;
-  font-size: 0.9rem;
+  font-size: 1rem;
   font-weight: 500;
   background-color: transparent;
   text-align: center;
   max-width: 100%;
-  white-space: nowrap;
+
+  display: -webkit-box;
+  -webkit-line-clamp: 2;   /* max 2 lines */
+  -webkit-box-orient: vertical;
   overflow: hidden;
   text-overflow: ellipsis;
 
-  min-height: 1.5rem; /* equal spacing fix */
-  line-height: 1.5rem;
+  min-height: 2.8rem;  /* dono lines ke liye equal space */
+  line-height: 1.4rem; /* line height balance */
 }
+
 
 
 /* Hide scrollbar */
