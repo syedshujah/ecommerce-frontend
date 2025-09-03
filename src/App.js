@@ -14,6 +14,8 @@ import WhatsAppButton from "./components/WhatsAppButton";
 import Footer from "./components/Footer";
 import LoginRegister from "./pages/LoginRegister";
 import ScrollToTop from "./components/ScrollToTop";
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 
 function App() {
@@ -36,6 +38,7 @@ function App() {
         <Route path="/order-success" element={<OrderSuccess />} />
         <Route path="/login" element={<LoginRegister />} />
       </Routes>
+      <ToastContainer />
       <section data-aos="fade-up">
         <Footer />
       </section>

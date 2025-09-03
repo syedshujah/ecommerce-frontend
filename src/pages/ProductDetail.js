@@ -3,7 +3,7 @@ import { useParams, Link } from "react-router-dom";
 import { Container, Row, Col, Image, Spinner, Button } from "react-bootstrap";
 import { useCart } from "../context/CartContext";
 import ProductCard from "../components/ProductCard"; // ✅ Import your reusable card component
-
+import { showAddToCartToast } from "../utils/useToast";
 function ProductDetail() {
   const { id } = useParams();
   const { addToCart } = useCart();
@@ -51,7 +51,11 @@ function ProductDetail() {
           <Button
             variant="primary"
             className="mt-4"
-            onClick={() => addToCart(product)}
+            onClick={() => {
+    addToCart(product);
+    showAddToCartToast(product); // 👈 Toast Call Here
+  }}
+
           >
             Add to Cart
           </Button>

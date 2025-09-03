@@ -2,9 +2,15 @@ import React from "react";
 import { Card, Button } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import { useCart } from "../context/CartContext";
+import { showAddToCartToast } from "../utils/useToast";
 
 function ProductCard({ product }) {
   const { addToCart } = useCart();
+
+  const handleAddToCart = () => {
+    addToCart(product);
+    showAddToCartToast(product); // ✅ Show popup with counter
+  };
 
   return (
     <Card
@@ -61,7 +67,7 @@ function ProductCard({ product }) {
         <Button
           size="sm"
           variant="outline-primary"
-          onClick={() => addToCart(product)}
+          onClick={handleAddToCart} // ✅ FIXED HERE
         >
           Add to Cart
         </Button>

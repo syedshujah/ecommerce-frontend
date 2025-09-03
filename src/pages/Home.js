@@ -13,16 +13,17 @@ function Home() {
           🎉 Welcome to Blue Mart! | FREE Shipping Above Rs. 3000 | Flash Sale LIVE!
         </div>
       </div>
+      
+      <div className=" mt-4">
+        <FeaturedProducts />
+      </div>
+      
       <section data-aos="fade-up">
         <HeroBanner />
       </section>
 
       <section data-aos="zoom-in-up">
         <CategoryGrid />
-      </section>
-
-      <section data-aos="fade-right">
-        <FeaturedProducts />
       </section>
       <section className="mt-5">
         <Testimonials />
