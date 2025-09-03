@@ -24,7 +24,6 @@ function HeroBanner() {
                 className="d-block w-100 banner-img"
                 src={banner.img}
                 alt={`Slide ${idx + 1}`}
-                onClick={() => navigate("/products")}
               />
               <div className="banner-overlay">
                 <h2>MEGA SALE</h2>

@@ -23,6 +23,13 @@ function FeaturedProducts() {
     fetchFeatured();
   }, []);
 
+  const truncateName = (name, maxLength = 13) => {
+    if (name.length > maxLength) {
+      return name.slice(0, maxLength) + "...";
+    }
+    return name;
+  };
+
   if (loading) {
     return (
       <div className="text-center my-5">
@@ -43,7 +50,12 @@ function FeaturedProducts() {
             <div className="category-img">
               <img src={product.thumbnail} alt={product.title} />
             </div>
-            <span className="category-name">{product.title}</span>
+            <span
+              className="category-name"
+              title={product.title}   // hover pe full name dikhayega
+            >
+              {truncateName(product.title)}
+            </span>
           </Link>
         ))}
       </div>

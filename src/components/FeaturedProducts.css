@@ -74,18 +74,48 @@
   margin-top: 8px;
   font-size: 1rem;
   font-weight: 500;
-  background-color: transparent;
   text-align: center;
   max-width: 100%;
-
-  display: -webkit-box;
-  -webkit-line-clamp: 2;   /* max 2 lines */
-  -webkit-box-orient: vertical;
+  min-height: 2rem;
+  line-height: 1.2rem;
   overflow: hidden;
   text-overflow: ellipsis;
+  white-space: nowrap;
+  background-color: transparent;
 
-  min-height: 2.8rem;  /* dono lines ke liye equal space */
-  line-height: 1.4rem; /* line height balance */
+  position: relative;   /* tooltip ke liye anchor */
+}
+
+.category-name:hover::after {
+  content: attr(title);
+  position: absolute;
+  bottom: 125%; /* text ke upar space */
+  left: 50%;
+  transform: translateX(-50%);
+  
+  background: rgba(0, 0, 0, 0.85);
+  color: #fff;
+  padding: 6px 10px;
+  border-radius: 6px;
+  font-size: 0.85rem;
+  line-height: 1.2rem;
+  white-space: normal;   /* allow multiple lines */
+  max-width: 220px;
+  z-index: 999;
+
+  box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+}
+
+/* optional arrow niche */
+.category-name:hover::before {
+  content: "";
+  position: absolute;
+  bottom: 115%; /* tooltip ke just niche */
+  left: 50%;
+  transform: translateX(-50%);
+  border-width: 6px;
+  border-style: solid;
+  border-color: rgba(0,0,0,0.85) transparent transparent transparent;
 }
 
 
