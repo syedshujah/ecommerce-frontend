@@ -65,15 +65,19 @@
 }
 
 .category-name {
-  margin-top: 12px;
-  font-size: 1rem;
+  margin-top: 8px;
+  font-size: 0.9rem;
   font-weight: 500;
- background-color: transparent;
+  background-color: transparent;
   text-align: center;
   max-width: 100%;
-  white-space: nowrap;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;   /* max 2 lines */
+  -webkit-box-orient: vertical;
   overflow: hidden;
   text-overflow: ellipsis;
+  line-height: 1.2rem;
+  min-height: 2.4rem; /* fixed height for equal spacing */
 }
 
 /* Hide scrollbar */
