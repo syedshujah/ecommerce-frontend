@@ -15,21 +15,31 @@ function HeroBanner() {
   ];
 
   return (
-<section data-aos="fade-down">
-    <div className="hero-banner">
-      <Carousel fade interval={3000}>
-        {banners.map((banner, idx) => (
-          <Carousel.Item key={idx} onClick={() => navigate("/products")} style={{ cursor: "pointer" }}>
-            <img className="d-block w-100 banner-img" src={banner.img} alt={`Slide ${idx + 1}`} />
-            <div className="banner-overlay">
-              <h2>MEGA SALE</h2>
-              <p>{banner.discount} OFF</p>
-              <button className="shop-now-btn">Shop Now</button>
-            </div>
-          </Carousel.Item>
-        ))}
-      </Carousel>
-    </div>
+    <section data-aos="fade-down">
+      <div className="hero-banner">
+        <Carousel fade interval={3000}>
+          {banners.map((banner, idx) => (
+            <Carousel.Item key={idx} style={{ cursor: "pointer" }}>
+              <img
+                className="d-block w-100 banner-img"
+                src={banner.img}
+                alt={`Slide ${idx + 1}`}
+                onClick={() => navigate("/products")}
+              />
+              <div className="banner-overlay">
+                <h2>MEGA SALE</h2>
+                <p>{banner.discount} OFF</p>
+                <button
+                  className="shop-now-btn"
+                  onClick={() => navigate("/products")}
+                >
+                  Shop Now
+                </button>
+              </div>
+            </Carousel.Item>
+          ))}
+        </Carousel>
+      </div>
     </section>
   );
 }
