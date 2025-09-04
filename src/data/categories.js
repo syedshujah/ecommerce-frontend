@@ -1,10 +1,15 @@
-
-
 const categories = [
   "smartphones",
   "laptops",
   "fragrances",
   "skincare",
+  "Makeup",
+  "Beauty Tools",
+  "Hair Care",
+  "Fragrances",
+  "Sunblock",
+  "Serums",
+  "Facewash",
   "groceries",
   "home-decoration",
   "furniture",
@@ -21,7 +26,6 @@ const categories = [
   "automotive",
   "motorcycle",
   "lighting"
-]
-
+];
 
 export default categories;

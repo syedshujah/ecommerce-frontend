@@ -57,16 +57,13 @@ function NavigationBar() {
         expand="lg"
         expanded={expanded}
         onToggle={() => setExpanded(!expanded)}
-        className="navbar-custom py-2"
+        className="navbar-custom "
         variant="light"
         sticky="top"
       >
         <Container fluid>
           <Navbar.Brand as={Link} to="/" className="d-flex align-items-center gap-2">
-            <img src="/Logo.svg" alt="Logo" width="32" height="32" />
-            <span style={{ color: "#fff", fontWeight: "bold", fontSize: "1.2rem" }}>
-              Blue Mart
-            </span>
+            <img src="/Logoc.avif" alt="Logo" width="40" height="40" />
           </Navbar.Brand>
 
           <Navbar.Toggle aria-controls="navbarScroll" className="bg-light" />

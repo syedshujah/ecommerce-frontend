@@ -3,42 +3,44 @@ import { useNavigate } from "react-router-dom";
 import "./CategoryGrid.css";
 
 const categories = [
-    { name: "smartphones", image: "/categories/smartphone.avif" },
-    { name: "laptops", image: "/categories/laptops.jpeg" },
-    { name: "fragrances", image: "/categories/fragrances.webp" },
-    { name: "groceries", image: "/categories/groceries.jpg" },
-    { name: "furniture", image: "/categories/furniture.jpeg" },
-    { name: "tops", image: "/categories/tops.jpg" },
+  { name: "Skincare", image: "/categories/img1.png" },
+  { name: "Makeup", image: "/categories/img2.png" },
+  { name: "Beauty Tools", image: "/categories/img3.png" },
+  { name: "Hair Care", image: "/categories/img4.png" },
+  { name: "Fragrances", image: "/categories/img5.png" },
+  { name: "Sunblock", image: "/categories/img6.png" },
+  { name: "Serums", image: "/categories/img7.png" },
+  { name: "Facewash", image: "/categories/img8.png" },
 ];
 
 function CategoryGrid() {
-    const navigate = useNavigate();
+  const navigate = useNavigate();
 
-    const handleClick = (category) => {
-        navigate(`/products?category=${category}`);
-    };
+  const handleClick = (category) => {
+    navigate(`/products?category=${category}`);
+  };
 
-    return (
-        <section data-aos="slide-up">
-        <div className="category-grid-container">
-            <h2 className="text-center text-primary fw-bold mb-4 section-heading">Shop by Category</h2>
-            <div className="category-grid">
-                {categories.map((cat, index) => (
-                    <div
-                        key={cat.name}
-                        className="category-card"
-                        onClick={() => handleClick(cat.name)}
-                        style={{ animationDelay: `${index * 0.2}s` }} // 👈 new
-                    >
-                        <img src={cat.image} alt={cat.name} className="category-image" />
-                        <div className="category-name">{cat.name.toUpperCase()}</div>
-                    </div>
-                ))}
-
+  return (
+    <section className="cg-container">
+      <div className="cg-grid">
+        {categories.map((cat, index) => (
+          <div
+            key={cat.name}
+            className="cg-item"
+            onClick={() => handleClick(cat.name)}
+            style={{ animationDelay: `${index * 0.1}s` }}
+          >
+            <div className="cg-img">
+              <img src={cat.image} alt={cat.name} />
             </div>
-        </div>
-        </section>
-    );
+            <div className="cg-name" title={cat.name}>
+              {cat.name.toUpperCase()}
+            </div>
+          </div>
+        ))}
+      </div>
+    </section>
+  );
 }
 
 export default CategoryGrid;

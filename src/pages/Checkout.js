@@ -21,7 +21,31 @@ function Checkout() {
     <Container className="my-5">
       <Row className="justify-content-center">
         <Col md={10}>
-          <h2 className="text-center fw-bold text-primary mb-4">🧾 Checkout Summary</h2>
+          <div className="mb-5 text-center">
+            <h2 
+              className="fw-bold mb-3"
+              style={{
+                fontSize: '2.2rem',
+                color: '#2c3e50',
+                fontFamily: "'Poppins', sans-serif",
+                position: 'relative',
+                display: 'inline-block',
+                paddingBottom: '10px'
+              }}
+            >
+              🧾 Checkout Summary
+            </h2>
+            <div 
+              style={{
+                height: '2px',
+                width: '80px',
+                background: '#2c3e50',
+                margin: '12px auto 0',
+                borderRadius: '2px',
+                opacity: '0.7'
+              }}
+            />
+          </div>
           <Row>
             {/* Cart Items */}
             <Col md={7}>

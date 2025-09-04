@@ -1,7 +1,7 @@
 import React from "react";
 import HeroBanner from "../components/HeroBanner";
 import CategoryGrid from "../components/CategoryGrid";
-import FeaturedProducts from "../components/FeaturedProducts";
+import TrendingCategories from "../components/TrendingProducts";
 import Testimonials from "../components/Testimonials";
 import Newsletter from "../components/Newsletter";
 import SocialMediaSection from "../components/SocialMediaSection";
@@ -15,16 +15,17 @@ function Home() {
       </div>
       
       <div className=" mt-4">
-        <FeaturedProducts />
+      <CategoryGrid />
       </div>
       
       <section data-aos="fade-up">
         <HeroBanner />
       </section>
-
-      <section data-aos="zoom-in-up">
-        <CategoryGrid />
+      <section className="mt-5">
+        <TrendingCategories />
       </section>
+
+      
       <section className="mt-5">
         <Testimonials />
       </section>

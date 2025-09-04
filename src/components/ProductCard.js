@@ -1,61 +1,56 @@
-import React from "react";
+import React, { useState } from "react";
 import { Card, Button } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import { useCart } from "../context/CartContext";
 import { showAddToCartToast } from "../utils/useToast";
+import "./ProductCard.css"; // 👈 custom css
 
 function ProductCard({ product }) {
   const { addToCart } = useCart();
+  const [hovered, setHovered] = useState(false);
 
   const handleAddToCart = () => {
     addToCart(product);
-    showAddToCartToast(product); // ✅ Show popup with counter
+    showAddToCartToast(product);
   };
+
+  // ✅ Discounted price calculate
+  const discountedPrice = (
+    product.price -
+    (product.price * product.discountPercentage) / 100
+  ).toFixed(2);
 
   return (
     <Card
-      className="product-card h-100 shadow-sm border-0"
-      style={{
-        borderRadius: "12px",
-        overflow: "hidden",
-        backgroundColor: "#ffffff",
-      }}
+      className="product-card shadow-sm border-0 h-100"
+      onMouseEnter={() => setHovered(true)}
+      onMouseLeave={() => setHovered(false)}
     >
       {/* ✅ Image Section */}
       <Link
         to={`/product/${product.id}`}
         style={{ textDecoration: "none", color: "inherit" }}
       >
-        <div
-          style={{
-            height: "200px",
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
-            backgroundColor: "#f8f9fa",
-            padding: "10px",
-          }}
-        >
+        <div className="product-img-wrapper">
           <img
-            src={product.thumbnail}
+            src={hovered && product.images[1] ? product.images[1] : product.thumbnail}
             alt={product.title}
-            style={{
-              maxHeight: "100%",
-              maxWidth: "100%",
-              objectFit: "contain",
-            }}
+            className="product-img"
           />
+          {product.discountPercentage > 0 && (
+            <span className="discount-badge">
+              -{Math.round(product.discountPercentage)}%
+            </span>
+          )}
         </div>
 
+
         {/* ✅ Product Info */}
-        <Card.Body className="px-3 py-2">
+        <Card.Body className="px-3 py-2 text-center">
           <Card.Title className="fs-6 fw-semibold text-dark mb-1">
             {product.title}
           </Card.Title>
-          <Card.Text
-            className="text-muted"
-            style={{ fontSize: "13px", minHeight: "36px" }}
-          >
+          <Card.Text className="text-muted small">
             {product.description.slice(0, 50)}...
           </Card.Text>
         </Card.Body>
@@ -63,12 +58,15 @@ function ProductCard({ product }) {
 
       {/* ✅ Price & Add to Cart */}
       <div className="d-flex justify-content-between align-items-center px-3 pb-3">
-        <span className="fw-bold text-primary">${product.price}</span>
-        <Button
-          size="sm"
-          variant="outline-primary"
-          onClick={handleAddToCart} // ✅ FIXED HERE
-        >
+        {product.discountPercentage > 0 ? (
+          <div className="price-section">
+            <span className="original-price">${product.price}</span>
+            <span className="discounted-price">${discountedPrice}</span>
+          </div>
+        ) : (
+          <span className="normal-price">${product.price}</span>
+        )}
+        <Button size="sm" variant="outline-primary" onClick={handleAddToCart}>
           Add to Cart
         </Button>
       </div>

@@ -7,12 +7,14 @@ import "./HeroBanner.css";
 function HeroBanner() {
   const navigate = useNavigate();
   const banners = [
-    { img: "/banner/banner1.jpg", discount: "30%" },
-    { img: "/banner/banner2.jpg", discount: "20%" },
-    { img: "/banner/banner3.jpg", discount: "50%" },
-    { img: "/banner/banner4.jpg", discount: "35%" },
-    { img: "/banner/banner5.jpg", discount: "45%" },
+    { img: "/banner/banner1.jpg", discount: "30%", category: "electronics", title: "Electronics Bonanza" },
+    { img: "/banner/banner2.jpg", discount: "20%", category: "fashion", title: "Trendy Fashion Sale" },
+    { img: "/banner/banner3.jpg", discount: "50%", category: "shoes", title: "Shoes Mega Sale" },
+    { img: "/banner/banner4.jpg", discount: "35%", category: "watches", title: "Luxury Watches" },
+    { img: "/banner/banner5.jpg", discount: "45%", category: "bags", title: "Stylish Bags Discount" },
   ];
+  
+
 
   return (
     <section data-aos="fade-down">
@@ -23,17 +25,22 @@ function HeroBanner() {
               <img
                 className="d-block w-100 banner-img"
                 src={banner.img}
-                alt={`Slide ${idx + 1}`}
+                alt={`${banner.category} sale - ${banner.discount} OFF`}
               />
               <div className="banner-overlay">
-                <h2>MEGA SALE</h2>
+                <h2>{banner.title}</h2>
                 <p>{banner.discount} OFF</p>
                 <button
                   className="shop-now-btn"
-                  onClick={() => navigate("/products")}
+                  onClick={() =>
+                    navigate(
+                      `/products?discount=true&category=${banner.category}`
+                    )
+                  }
                 >
                   Shop Now
                 </button>
+
               </div>
             </Carousel.Item>
           ))}

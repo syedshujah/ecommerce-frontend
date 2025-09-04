@@ -27,7 +27,31 @@ function Cart() {
 
   return (
     <Container className="mt-4">
-      <h3 className="mb-4 text-center text-primary fw-bold">Your Shopping Cart</h3>
+      <div className="mb-5 text-center">
+        <h2 
+          className="fw-bold mb-3"
+          style={{
+            fontSize: '2.2rem',
+            color: '#2c3e50',
+            fontFamily: "'Poppins', sans-serif",
+            position: 'relative',
+            display: 'inline-block',
+            paddingBottom: '10px'
+          }}
+        >
+          Your Shopping Cart
+        </h2>
+        <div 
+          style={{
+            height: '2px',
+            width: '80px',
+            background: '#2c3e50',
+            margin: '12px auto 0',
+            borderRadius: '2px',
+            opacity: '0.7'
+          }}
+        />
+      </div>
 
       {cartItems.length === 0 ? (
         <p className="text-center">Your cart is empty.</p>
